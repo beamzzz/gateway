@@ -1,0 +1,23 @@
+server:
+  port: 7000
+
+#注册中心地址
+url.eureka: 127.0.0.1:9001
+
+zuul:
+  routes:
+    user-service:
+      path: /user/**
+      url: user-server
+      stripPrefix: false
+
+
+#注册中心配置
+eureka:
+  client:
+    service-url:
+      defaultZone: http://${url.eureka}/eureka/
+  instance:
+    prefer-ip-address: true
+    preferIpAddress: true
+    instance-id: 127.0.0.1:${server.port}
