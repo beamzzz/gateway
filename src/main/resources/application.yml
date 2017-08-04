@@ -1,7 +1,7 @@
 server:
   port: 7000
 
-#×¢²áÖĞĞÄµØÖ·
+#æ³¨å†Œä¸­å¿ƒåœ°å€
 url.eureka: 127.0.0.1:9001
 
 zuul:
@@ -10,9 +10,12 @@ zuul:
       path: /user/**
       url: user-server
       stripPrefix: false
+  host:
+    connect-timeout-millis: 10000
+    socket-timeout-millis: 60000
 
 
-#×¢²áÖĞĞÄÅäÖÃ
+#æ³¨å†Œä¸­å¿ƒ
 eureka:
   client:
     service-url:
@@ -21,3 +24,13 @@ eureka:
     prefer-ip-address: true
     preferIpAddress: true
     instance-id: 127.0.0.1:${server.port}
+
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: false
+        isolation:
+          thread:
+            timeoutInMilliseconds: 180000
